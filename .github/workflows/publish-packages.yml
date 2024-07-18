@@ -1,0 +1,29 @@
+name: Publish Package into github package registry
+
+on:
+  release: 
+    types: published
+
+jobs:
+  test-publish-package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      
+      - name: Setup nodejs version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Install dependencies
+        run: npm install
+      - name: publish to Github Registry
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          
+     

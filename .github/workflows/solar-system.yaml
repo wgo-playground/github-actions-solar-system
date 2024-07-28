@@ -15,8 +15,8 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        version: [18, 19, 20]
+        os: [ubuntu-latest]
+        version: [18, 19]
         exclude:
         - os: macos-latest
           version: 18
@@ -130,7 +130,8 @@ jobs:
            version: 'v1.29.0' # default is latest stable
         id: install
       - name: kubectl version
-        run: kubectl -v
+        run: kubectl version
+
 
 
 

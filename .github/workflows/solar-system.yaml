@@ -24,6 +24,11 @@ jobs:
       run: npm install
     - name: test the nodejs code with node test
       run: npm test
+    - name: upload artifact
+      uses: actions/upload-artifact@v3
+      with: 
+        name: nodejs-artifact
+        path: test-result.xml
 
 
 

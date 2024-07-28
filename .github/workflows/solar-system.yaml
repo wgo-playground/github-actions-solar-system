@@ -118,3 +118,19 @@ jobs:
           ghcr.io/${{ github.actor}}/solar-system-demo:${{github.run_number}}
 
 
+  dev-deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+      - name: install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+           version: 'v1.29.0' # default is latest stable
+        id: install
+      - name: kubectl version
+        run: kubectl -v
+
+
+

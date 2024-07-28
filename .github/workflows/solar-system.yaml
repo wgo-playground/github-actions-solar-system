@@ -1,0 +1,28 @@
+name: solar system application testing
+on:
+  push:
+    branches:
+    - main
+    - 'feature/*'
+  workflow_dispatch:
+
+jobs:
+  unit-testing:
+    name: CI testing for the nodejs application
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout the code
+      uses: actions/checkout@v4
+    - name: install node js version 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: install dependencies
+      run: npm install
+    - name: test the nodejs code
+      run: node test
+
+
+
+
+  

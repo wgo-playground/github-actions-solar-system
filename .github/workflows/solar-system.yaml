@@ -50,6 +50,17 @@ jobs:
   code-coverage:
     needs: unit-testing
     name: code coverage
+    container:
+      image: node:18
+    services:
+      mongo-db:
+        image: katravath55/mongodb:latest
+        options:
+          -- name mongo
+    env:
+      MONGO_URI: 'mongodb://mongo:27017/superData'
+      MONGO_INITDB_ROOT_USERNAME: skatravath
+      MONGO_INITDB_ROOT_PASSWORD: skatravath
     runs-on: ubuntu-latest
     steps:
     - name: checkout code

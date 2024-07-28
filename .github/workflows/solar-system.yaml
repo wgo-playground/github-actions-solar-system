@@ -12,14 +12,21 @@ env:
 jobs:
   unit-testing:
     name: CI testing for the nodejs application
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        version: [18, 19, 20]
+        exclude:
+        - os: macos-latest
+        - version: 18
     steps:
     - name: checkout the code
       uses: actions/checkout@v4
-    - name: install node js version 20
+    - name: install node js version ${{matrix.version}}
       uses: actions/setup-node@v3
       with:
-        node-version: 20
+        node-version: ${{matrix.version}}
     - name: install dependencies
       run: npm install
     - name: test the nodejs code with node test
@@ -28,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with: 
         name: nodejs-artifact
-        path: /test-result.xml
+        path: test-results.xml
 
 
 

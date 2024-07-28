@@ -107,7 +107,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push to dockerhub
+    - name: Build and push to dockerhub accepted the cuurent change
       uses: docker/build-push-action@v6
       with:
         context: .
@@ -116,11 +116,3 @@ jobs:
         tags: |
           katravath55/github-action-test:latest
           ghcr.io/${{ github.actor}}/solar-system-demo:${{github.run_number}}
-<<<<<<< HEAD
-=======
-
-
-
-  
-
->>>>>>> 9d583b54b12e029f4aca10e030e5b0d48d91082e

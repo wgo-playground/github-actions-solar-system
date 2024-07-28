@@ -54,7 +54,7 @@ jobs:
       run: npm run coverage
       
     - name: upload code coverage
-      if: failure()
+      if: success()
       uses: actions/upload-artifact@v3
       with: 
         name: coverage-results

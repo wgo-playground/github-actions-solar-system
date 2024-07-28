@@ -11,7 +11,7 @@ env:
   MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 jobs:
   unit-testing:
-    name: CI testing for the nodejs application
+    name: CI testing for the nodejs application working
     runs-on: ${{matrix.os}}
     strategy:
       matrix:

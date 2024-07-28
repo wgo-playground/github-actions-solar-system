@@ -67,7 +67,7 @@ jobs:
             # npm cache files are stored in node_modules
         path: node_modules
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        
+
     - name: install dependencies
       run: npm install
     - name: run code coverage
@@ -79,7 +79,7 @@ jobs:
       with: 
         name: coverage-results
         path: coverage
-        retention-days: 5
+        retention-days: 10
 
 
 

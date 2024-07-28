@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with: 
         name: nodejs-artifact
-        path: test-result.xml
+        path: /test-result.xml
 
 
 

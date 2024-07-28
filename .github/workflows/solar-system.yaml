@@ -132,6 +132,11 @@ jobs:
         id: install
       - name: kubectl version
         run: kubectl version
+      - uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          context: solar-system
 
 
 

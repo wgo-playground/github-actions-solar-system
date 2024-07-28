@@ -5,7 +5,10 @@ on:
     - main
     - 'feature/*'
   workflow_dispatch:
-
+env:
+  MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+  MONGO_USERNAME : ${{ vars.MONGO_USERNAME }}
+  MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 jobs:
   unit-testing:
     name: CI testing for the nodejs application

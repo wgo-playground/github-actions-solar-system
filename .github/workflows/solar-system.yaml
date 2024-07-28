@@ -82,6 +82,7 @@ jobs:
         retention-days: 20
 
   build-and-push:
+    needs: code-coverage
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repository

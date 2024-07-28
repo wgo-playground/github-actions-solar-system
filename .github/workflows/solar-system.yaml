@@ -19,7 +19,7 @@ jobs:
         version: [18, 19, 20]
         exclude:
         - os: macos-latest
-        - version: 18
+          version: 18
     steps:
     - name: checkout the code
       uses: actions/checkout@v4

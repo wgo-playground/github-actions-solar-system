@@ -116,6 +116,5 @@ jobs:
         tags: |
           katravath55/github-action-test:latest
           ghcr.io/${{ github.actor}}/solar-system-demo:${{github.run_number}}
-          
-    - name: docker pull
-      run: docker pull katravath55/mongodb:latest
+
+

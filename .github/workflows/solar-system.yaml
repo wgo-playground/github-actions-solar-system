@@ -132,6 +132,7 @@ jobs:
         id: install
       - name: kubectl version
         run: kubectl version
+        continue-on-error: true
       - uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig

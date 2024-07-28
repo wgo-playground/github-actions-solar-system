@@ -37,6 +37,26 @@ jobs:
         name: nodejs-artifact
         path: test-results.xml
 
+  code-coverage:
+    name: code coverage
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v4
+    - name: install nodejs
+      uses: actions/setup-node@v3
+      with: 
+        node-version: 18
+    - name: install dependencies
+      run: npm install
+    - name: run code coverage
+      run: npm run coverage
+    - name: upload code coverage
+      uses: actions/upload-artifact@v3
+      with: 
+        name: coverage-results
+        path: coverage
+        retention-days: 5
 
 
 

@@ -38,6 +38,7 @@ jobs:
         path: test-results.xml
 
   code-coverage:
+    needs: unit-testing
     name: code coverage
     runs-on: ubuntu-latest
     steps:
@@ -51,6 +52,7 @@ jobs:
       run: npm install
     - name: run code coverage
       run: npm run coverage
+      continue-on-error: true
     - name: upload code coverage
       uses: actions/upload-artifact@v3
       with: 

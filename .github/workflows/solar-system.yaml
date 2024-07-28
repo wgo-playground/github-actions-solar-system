@@ -55,6 +55,7 @@ jobs:
       continue-on-error: true
       
     - name: upload code coverage
+      if: success()
       uses: actions/upload-artifact@v3
       with: 
         name: coverage-results

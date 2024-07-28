@@ -106,7 +106,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: katravath55/github-action-test:latest
+        tags: katravath55/github-action-test:v1.0.232
 
 
 

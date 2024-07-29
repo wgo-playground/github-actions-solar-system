@@ -120,6 +120,10 @@ jobs:
 
   dev-deploy:
     needs: build-and-push
+    environment:
+      name: dev
+      url: https://shivakatravath.com
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
@@ -159,8 +163,15 @@ jobs:
           REPLICAS: ${{vars.REPLICAS}}
           IMAGE: katravath55/github-action-test:latest
           INGRESS_IP: ${{env.INGRESS_IP}}
+        continue-on-error: true
       - name: check files
         run: cat kubernetes/development/*.yaml
+        continue-on-error: true
+
+      - name: deploy to dev env
+        run: |
+          kubectl apply -f kubernetes/development
+        continue-on-error: true
 
 
 

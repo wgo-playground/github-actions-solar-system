@@ -159,6 +159,8 @@ jobs:
           REPLICAS: ${{vars.REPLICAS}}
           IMAGE: katravath55/github-action-test:latest
           INGRESS_IP: ${{env.INGRESS_IP}}
+      - name: check files
+        run: cat kubernetes/development/*.yaml
 
 
 

@@ -1,0 +1,60 @@
+name: resuable worflow CI
+on: 
+  workflow_call:
+    secrets:
+      k8s-configfile:
+        required: true
+jobs:
+  CI:
+    environment:
+      name: dev
+      url: https://shivakatravath.com
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+        continue-on-error: true
+      - name: install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+           version: 'v1.29.0' # default is latest stable
+        id: install
+      - name: kubectl version
+        run: kubectl version
+        continue-on-error: true
+      - uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.k8s-configfile }}
+          context: solar-system
+      - name: fecth k8s cluster details
+        run: |
+          kubectl version
+          kubectl get pods -n kube-system
+          kubectl get nodes
+        continue-on-error: true
+      - name: save NGINX ingress IP as a GiTHUB Environment variale
+        run: |
+          echo "INGRESS_IP=$(kubectl get services ingress_ip -n ingress-nginx)" >> $GITHUB_ENV
+        continue-on-error: true
+      - name: replace tokens
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '_{_'
+          tokenSuffix: '_}_'
+          files: '["kubernetes/development/*.yaml"]'
+        env:
+          NAMESPACE: ${{ vars.NAMESPACE}}
+          REPLICAS: ${{vars.REPLICAS}}
+          IMAGE: katravath55/github-action-test:latest
+          INGRESS_IP: ${{env.INGRESS_IP}}
+        continue-on-error: true
+      - name: check files
+        run: cat kubernetes/development/*.yaml
+        continue-on-error: true
+
+      - name: deploy to dev env
+        run: |
+          kubectl apply -f kubernetes/development
+        continue-on-error: true

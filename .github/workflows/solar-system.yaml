@@ -142,7 +142,7 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
           context: solar-system
-      - name: fecth k8s cluster
+      - name: fecth k8s cluster details
         run: |
           kubectl version
           kubectl get pods -n kube-system

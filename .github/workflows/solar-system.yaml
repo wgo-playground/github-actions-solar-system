@@ -119,7 +119,7 @@ jobs:
 
 
   dev-deploy:
-    if: contains ('github.ref', 'feature/*')
+    if: github.ref == 'refs/heads/feature/test'
     needs: build-and-push
     uses: ./.github/workflows/resuable-workflow.yaml
 

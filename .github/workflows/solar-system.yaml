@@ -121,12 +121,12 @@ jobs:
   dev-deploy:
     if: github.ref == 'refs/heads/main'
     needs: build-and-push
-    uses: .github/workflows/resuable-workflow.yaml
+    uses: ./.github/workflows/resuable-workflow.yaml
 
   prod-deploy:
     if: github.ref == 'refs/heads/main'
     needs: build-and-push
-    uses: .github/workflows/resuable-workflow.yaml
+    uses: ./.github/workflows/resuable-workflow.yaml
 
 
 

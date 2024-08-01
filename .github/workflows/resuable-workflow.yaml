@@ -1,6 +1,9 @@
 name: resuable worflow CI
 on: 
   workflow_call:
+    secrets:
+      k8s-configfile:
+        required: true
 jobs:
   CI:
     environment:
@@ -23,7 +26,7 @@ jobs:
       - uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG }}
+          kubeconfig: ${{ secrets.k8s-configfile }}
           context: solar-system
       - name: fecth k8s cluster details
         run: |

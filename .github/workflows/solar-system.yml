@@ -9,7 +9,7 @@ on:
       - 'feature/*'
 
 env:
-  MONGO_uri: 'mongodb+srv://supercluster.h4afy.mongodb.net/sample_mflix'
+  MONGO_URI: 'mongodb+srv://supercluster.h4afy.mongodb.net/sample_mflix'
   MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
   MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 

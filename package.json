@@ -19,7 +19,6 @@
     "express": "*",
     "mocha-junit-reporter": "*",
     "mongoose": "*",
-    "nodemon": "*",
     "nyc": "*"
   },
   "devDependencies": {

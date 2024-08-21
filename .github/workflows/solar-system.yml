@@ -1,1 +1,94 @@
 
+
+name: Solar System Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+
+env:
+  MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+  #MONGO_URI: 'mongodb+srv://supercluster.h4afy.mongodb.net/sample_mflix'
+  MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
+  MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+
+jobs:
+  unit-testing:
+    name: Unit Testing
+    strategy:
+      matrix:
+        nodejs_version: [18, 20]
+        operating_system: [ubuntu-latest, macos-latest]
+        exclude:
+          - nodejs_version: 18
+            operating_system: macos-latest
+
+
+    runs-on: ${{ matrix.operating_system }}
+
+    steps:
+      - name: Checkout Repository 
+        uses: actions/checkout@v4
+        
+      - name: Setup NodeJS Version - ${{ matrix.nodejs_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.nodejs_version }}
+
+#      - name: Cache NPM dependencies
+#        uses: actions/cache@v4
+#        with:
+#          path: node_modules
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Unit Testing
+        id: nodejs-unit-testing-step
+        run: npm test
+
+      - name: Archive Test Result
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: Mocha-Test-Result
+          path: test-results.xml
+
+  code-coverage:
+    name: code coverage
+    runs-on: ubuntu-latest
+        
+    steps:
+    - name: Checkout Repository 
+      uses: actions/checkout@v4
+                
+    - name: Setup NodeJS Version - 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+#    - name: Cache NPM dependencies
+#      uses: actions/cache@v3
+#      with:
+#        path: node_modules
+#        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}        
+
+
+    - name: Install Dependencies
+      run: npm install
+        
+    - name: Check Code Coverage
+      continue-on-error: true
+      run: npm run coverage
+        
+    - name: Archive Test Result
+      uses: actions/upload-artifact@v3
+      with:
+        name: Code-Coverage-Result
+        path: coverage
+        retention-days: 5
+        

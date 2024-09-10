@@ -27,3 +27,6 @@ spec:
         envFrom:
         - secretRef:
             name: mongo-db-creds
+
+
+            

@@ -171,7 +171,7 @@ jobs:
     dev-deploy:
       if: contains(github.ref, 'feature/')
       needs: [docker]
-      uses: ./.github/workflows/reuse-deployment.yml@feature/exploring-workflows
+      uses: MANIBATHU/solar-system/.github/workflows/reuse-deployment.yml@feature/exploring-workflows
     
     dev-integration-testing:
         if: contains(github.ref, 'feature/')

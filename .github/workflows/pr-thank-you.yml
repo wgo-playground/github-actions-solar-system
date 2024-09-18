@@ -1,0 +1,26 @@
+name: "Create Docker and JavaScript Actions"
+
+on:
+  pull_request:
+    types: 
+      - opened
+
+jobs:
+  testing-action:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Post PR Comment
+        uses: MANIBATHU/docker-action-pr-giphy-comment@main # Assuming you have a custom action in the root of the repository
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          giphy-api-key: ${{ secrets.GIPHY_API_KEY }}
+
+      - name: Post PR JS Comment
+        uses: MANIBATHU/js-action-pr-giphy-comment@main # Assuming you have a custom action in the root of the repository
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          giphy-api-key: ${{ secrets.GIPHY_API_KEY }}

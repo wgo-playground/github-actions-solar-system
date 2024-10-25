@@ -108,6 +108,8 @@ jobs:
 
     dev-deploy:
       needs: docker
+      environment:
+         name: Development
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -125,3 +127,26 @@ jobs:
             kubectl version --short
             echo ---------------------------
             kubectl get nodes
+            
+
+    prod-deploy:
+      needs: dev-deploy
+      environment:
+         name: Production
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          continue-on-error: true
+          uses: actions/checkout@v4
+
+
+        - name: install kubectl CLI
+          uses: azure/setup-kubectl@v3
+          with:
+            version: 'v1.26.0'
+      
+        - name: Fetch Kube cluster detail 
+          run: |
+            kubectl version --short
+            echo ---------------------------
+            kubectl get nodes          

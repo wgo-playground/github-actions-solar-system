@@ -122,11 +122,11 @@ jobs:
           with:
             version: 'v1.26.0'
       
-        - name: Fetch Kube cluster detail 
-          run: |
-            kubectl version --short
-            echo ---------------------------
-            kubectl get nodes
+        # - name: Fetch Kube cluster detail 
+        #   run: |
+        #     kubectl version --short
+        #     echo ---------------------------
+        #     kubectl get nodes
             
 
     prod-deploy:

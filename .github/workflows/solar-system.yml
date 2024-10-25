@@ -146,6 +146,7 @@ jobs:
           uses: azure/setup-kubectl@v3
           with:
             version: 'v1.26.0'
+            
       
         # - name: Fetch Kube cluster detail 
         #   run: |

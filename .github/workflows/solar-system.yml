@@ -44,6 +44,7 @@ jobs:
           with:
             name: Mocha-Test-Result
             path: test-results.xml
+            retention-days: 5
 
     code-coverage:
       name: Code Coverage
@@ -73,7 +74,7 @@ jobs:
         shell: bash
 
       - name: Check Code Coverage
-        continue-on-error: true
+        continue-on-error: true # ignor error and execute the next step (for testing)
         run: npm run coverage
 
       - name: Archive Test Result

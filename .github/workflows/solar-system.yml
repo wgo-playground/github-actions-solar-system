@@ -86,10 +86,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup NodeJS Version - 18
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      # - name: Setup NodeJS Version - 18
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
 
       - name: Cache NPM dependencies
         uses: actions/cache@v3

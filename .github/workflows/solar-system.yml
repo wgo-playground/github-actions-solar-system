@@ -169,7 +169,7 @@ jobs:
 
 
     dev-deploy:
-      if: contains(github.ref, 'feature/')
+      # if : contains(github.ref, 'feature/')
       needs: docker
       runs-on: ubuntu-latest
       steps:
@@ -180,6 +180,13 @@ jobs:
         uses: azure/setup-kubectl@v3
         with:
           version: '1.26'
+
+      - name: Set Kubeconfig file
+        uses: azure/k8s-set-context@v3
+        continue-on-error: true # ignor error and execute the next step (for testing)
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
 
       - name: Fetch Kubernetes Cluster Details
         run: |

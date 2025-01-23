@@ -169,28 +169,14 @@ jobs:
 
 
     dev-deploy:
-      # if : contains(github.ref, 'feature/')
+      if: contains(github.ref, 'feature/')
       needs: docker
-      runs-on: ubuntu-latest
-      steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-      
-      - name: Install kubectl CLI
-        uses: azure/setup-kubectl@v3
-        with: 
-          version: 'v1.28.2'
-
-      - name: Set Kubeconfig file
-        uses: azure/k8s-set-context@v3
-        continue-on-error: true # ignor error and execute the next step (for testing)
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-
-      - name: Fetch Kubernetes Cluster Details
-        run: |
-          kubectl version --short
-          echo ---------------------------------------------------
-          kubectl get nodes
+      uses: ./.github/workflows/reuse-deployment.yml
+      secrets: 
+        k8s-kubeconfig: ${{ secrets.KUBECONFIG }}
+        mongodb-password: ${{ secrets.MONGO_PASSWORD}}
+      with:
+        mongodb-uri: ${{ vars.MONGO_URI }}
+        environment: development
+        k8s-manifest-dir: kubernetes/development/
  

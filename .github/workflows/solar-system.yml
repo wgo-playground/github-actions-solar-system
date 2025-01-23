@@ -169,7 +169,7 @@ jobs:
 
 
     dev-deploy:
-      if: contains(github.ref, 'feature/')
+      # if : contains(github.ref, 'feature/')
       needs: docker
       uses: ./.github/workflows/reuse-deployment.yml
       secrets: 

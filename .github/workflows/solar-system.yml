@@ -169,7 +169,7 @@ jobs:
 
 
     dev-deploy:
-      if: contains(github.ref, 'feature/')
+      #if : contains(github.ref, 'feature/')
       needs: docker
       uses: ./.github/workflows/reuse-deployment.yml
       secrets: 
@@ -181,7 +181,7 @@ jobs:
         k8s-manifest-dir: kubernetes/development/
 
     dev-integration-testing:
-        if: contains(github.ref, 'feature/')
+        #if : contains(github.ref, 'feature/')
         name: Dev Integration Testing
         needs: dev-deploy
         runs-on: ubuntu-latest

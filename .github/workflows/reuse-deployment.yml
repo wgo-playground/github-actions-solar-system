@@ -8,7 +8,7 @@ on:
           type: string
         kubectl-version:
             description: Provide the required Kubectl version
-            default: v1.28.2
+            default: v1.26.0
             required: false
             type: string
         k8s-manifest-dir:
